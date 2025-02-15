@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đếm Ngày Yêu ❤️</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background-color: #ffe4e1;
+        }
+        h1 {
+            color: #d63384;
+        }
+        #count {
+            font-size: 1.8rem;
+            color: #ff1493;
+            font-weight: bold;
+        }
+        #details {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #ff4500;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff69b4;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #d63384;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>💖 Chúng mình đã bên nhau 💖</h1>
+    <p id="count">Đang tính toán...</p>
+    <button onclick="toggleDetails()">❤️</button>
+    <p id="details"></p>
+
+    <script>
+        let loveStartDate = "2023-02-14"; // 📝 Thay đổi ngày yêu ở đây (YYYY-MM-DD)
+
+        function updateLoveTime() {
+            let start = new Date(loveStartDate);
+            let now = new Date();
+            let diff = now - start;
+
+            let years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
+            let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            let hours = Math.floor(diff / (1000 * 60 * 60));
+            let minutes = Math.floor(diff / (1000 * 60));
+            let seconds = Math.floor(diff / 1000);
+
+            // Cập nhật hiển thị chính
+            document.getElementById("count").innerText = 
+                `${years} năm, ${days % 365} ngày, ${hours % 24} giờ, ${minutes % 60} phút, ${seconds % 60} giây 💕`;
+
+            // Cập nhật nội dung chi tiết
+            document.getElementById("details").innerText = 
+                `Tổng cộng: \n${years} năm,\n ${days} ngày,\n ${hours} giờ,\n ${minutes} phút,\n ${seconds} giây`;
+        }
+
+        function toggleDetails() {
+            let details = document.getElementById("details");
+            if (details.style.display === "none") {
+                details.style.display = "block";
+            } else {
+                details.style.display = "none";
+            }
+        }
+
+        // Cập nhật mỗi giây
+        setInterval(updateLoveTime, 1000);
+
+        // Gọi ngay khi trang load
+        updateLoveTime();
+    </script>
+
+</body>
+</html>
