@@ -615,6 +615,7 @@ Drücke den Button!
 </div>
 
 <button onclick="randomSentence()">Random Satz</button>
+<button onclick="repeatSentence()">🔊 Noch einmal</button>
 
 <script>
 
@@ -625,21 +626,17 @@ let sentences = [
 "Was sind Herausforderungen als Konditor?",
 "Welche deiner Stärken passen zum Job und warum?",
 "Was sind deine Zukunftspläne in 5–10 Jahren?",
-"Was muss ich für den Job als Konditor  wissen?",
+"Was muss ich für den Job als Konditor wissen?",
 "Arbeit früh oder nachts / eher Männerberuf – Was denkst du?",
 "Haben Sie schon Erfahrung mit dem Backen?",
 "Was sind Ihre Stärken?",
 "Was sind Ihre Schwächen?",
-"Wie reagieren Sie auf schwierige Kunden?",
+"Wie reagieren Sie auf schwierige Kunden?"
 ];
 
-async function randomSentence(){
+let currentSentence = ""; // lưu câu hiện tại
 
-let randomIndex = Math.floor(Math.random() * sentences.length);
-
-let text = sentences[randomIndex];
-
-document.getElementById("sentence").innerText = text;
+function speak(text){
 
 let encodedText = encodeURIComponent(text);
 
@@ -648,7 +645,28 @@ let apiKey = "06ee2c4bace143c5b4402c80b2db2f82";
 let url = `https://api.voicerss.org/?key=${apiKey}&hl=de-de&src=${encodedText}&c=MP3`;
 
 let audio = new Audio(url);
-	audio.play();
+
+audio.play();
+
+}
+
+function randomSentence(){
+
+let randomIndex = Math.floor(Math.random() * sentences.length);
+
+currentSentence = sentences[randomIndex];
+
+document.getElementById("sentence").innerText = currentSentence;
+
+speak(currentSentence);
+
+}
+
+function repeatSentence(){
+
+if(currentSentence !== ""){
+speak(currentSentence);
+}
 
 }
 
