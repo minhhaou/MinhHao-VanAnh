@@ -584,6 +584,81 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<p class="footer-company-name">@minhhaou</p>
+					<style>
+body{
+    font-family: Arial;
+    text-align:center;
+    margin-top:100px;
+    background:#f5f5f5;
+}
+
+#sentence{
+    font-size:28px;
+    margin:40px;
+    color:#333;
+}
+
+button{
+    padding:15px 30px;
+    font-size:18px;
+    border:none;
+    background:#4CAF50;
+    color:white;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#45a049;
+}
+</style>
+
+<h1>Deutsch Satz Trainer</h1>
+
+<div id="sentence">
+Drücke den Button!
+</div>
+
+<button onclick="randomSentence()">Random Satz</button>
+
+<script>
+
+let sentences = [
+"Ich lerne jeden Tag Deutsch.",
+"Deutschland ist ein schönes Land.",
+"Ich möchte eine Ausbildung als Konditor machen.",
+"Am Wochenende koche ich gern.",
+"Deutsch lernen macht Spaß.",
+"Ich gehe heute einkaufen.",
+"Im Restaurant bestelle ich eine Suppe.",
+"Meine Familie lebt in Vietnam.",
+"Ich lese jeden Abend ein Buch.",
+"Ich trinke gern Kaffee."
+];
+
+async function randomSentence(){
+
+let randomIndex = Math.floor(Math.random() * sentences.length);
+
+let text = sentences[randomIndex];
+
+document.getElementById("sentence").innerText = text;
+
+let encodedText = encodeURIComponent(text);
+
+let url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodedText}&tl=de&client=tw-ob`;
+
+let audio = new Audio(url);
+
+try{
+await audio.play();
+}catch(e){
+console.log("Audio bị chặn:", e);
+}
+
+}
+
+</script>
 				</div>
 			</div>
 		</div>
